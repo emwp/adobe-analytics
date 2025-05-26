@@ -6,7 +6,7 @@ import {
   trackFormInputChanged,
   trackFormSubmit,
   trackButtonClick,
-} from "../lib/analytics";
+} from "@repo/analytics";
 
 export default function Contact() {
   const [formData, setFormData] = useState({

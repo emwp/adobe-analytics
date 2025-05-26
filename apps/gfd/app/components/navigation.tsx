@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { trackButtonClick } from "../lib/analytics";
+import { trackButtonClick } from "@repo/analytics";
 
 const Navigation = () => {
   const pathname = usePathname();

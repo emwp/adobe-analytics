@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { trackPageView } from "../lib/analytics";
+import { trackPageView } from "@repo/analytics";
 
 interface AnalyticsProviderProps {
   children: React.ReactNode;

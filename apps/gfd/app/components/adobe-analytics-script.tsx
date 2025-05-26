@@ -15,6 +15,7 @@ const AdobeAnalyticsScript = ({
       <Script
         id="adobe-analytics-config"
         strategy="beforeInteractive"
+        src="https://assets.adobedtm.com/x/y/z.min.js"
         dangerouslySetInnerHTML={{
           __html: `
             // Adobe Analytics Configuration

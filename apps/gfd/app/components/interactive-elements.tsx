@@ -8,7 +8,7 @@ import {
   trackFormSubmit,
   trackRightClick,
   trackCustomEvent,
-} from "../lib/analytics";
+} from "@repo/analytics";
 
 const InteractiveElements = () => {
   const [formData, setFormData] = useState({

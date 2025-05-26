@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { trackButtonClick, trackCustomEvent } from "../lib/analytics";
+import { trackButtonClick, trackCustomEvent } from "@repo/analytics";
 
 export default function Demo() {
   const [clickCount, setClickCount] = useState(0);
