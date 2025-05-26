@@ -203,18 +203,87 @@ const AnalyticsTerminal = () => {
                     </span>
                   </div>
                   <div style={{ marginLeft: "1rem", color: "#10b981" }}>
-                    {event.type === "pageview" && (
+                    {event.type === "pageLoadEvent" && (
                       <div>
-                        <div>Page: {event.data.pageName}</div>
-                        <div>Channel: {event.data.channel}</div>
-                        <div>Events: {event.data.events}</div>
+                        <div>Path: {event.data.path}</div>
+                        <div>Title: {event.data.title}</div>
+                        <div>App: {event.data.appName}</div>
+                        <div>Browser: {event.data.browser}</div>
+                        <div>User: {event.data.userId}</div>
                       </div>
                     )}
-                    {event.type === "link" && (
+                    {event.type === "clickEvent" && (
                       <div>
-                        <div>Type: {event.data.linkType}</div>
-                        <div>Name: {event.data.linkName}</div>
-                        <div>Events: {event.data.events}</div>
+                        <div>Button: {event.data.buttonText}</div>
+                        <div>Type: {event.data.buttonType}</div>
+                        <div>Section: {event.data.section}</div>
+                        <div>App: {event.data.appName}</div>
+                        <div>User: {event.data.userId}</div>
+                      </div>
+                    )}
+                    {event.type === "formStartEvent" && (
+                      <div>
+                        <div>Form: {event.data.formName}</div>
+                        <div>Type: {event.data.formType}</div>
+                        <div>Section: {event.data.section}</div>
+                        <div>App: {event.data.appName}</div>
+                      </div>
+                    )}
+                    {event.type === "formInputEvent" && (
+                      <div>
+                        <div>Form: {event.data.formName}</div>
+                        <div>Field: {event.data.fieldName}</div>
+                        <div>
+                          Value: {event.data.fieldValue?.substring(0, 20)}...
+                        </div>
+                        <div>App: {event.data.appName}</div>
+                      </div>
+                    )}
+                    {event.type === "formSubmitEvent" && (
+                      <div>
+                        <div>Form: {event.data.formName}</div>
+                        <div>Type: {event.data.formType}</div>
+                        <div>Section: {event.data.section}</div>
+                        <div>App: {event.data.appName}</div>
+                      </div>
+                    )}
+                    {event.type === "rightClickEvent" && (
+                      <div>
+                        <div>Element: {event.data.elementName}</div>
+                        <div>Section: {event.data.section}</div>
+                        <div>App: {event.data.appName}</div>
+                      </div>
+                    )}
+                    {event.type === "customEvent" && (
+                      <div>
+                        <div>Event: {event.data.eventName}</div>
+                        <div>App: {event.data.appName}</div>
+                        {event.data.action && (
+                          <div>Action: {event.data.action}</div>
+                        )}
+                        {event.data.clickCount && (
+                          <div>Count: {event.data.clickCount}</div>
+                        )}
+                        <div>User: {event.data.userId}</div>
+                      </div>
+                    )}
+                    {![
+                      "pageLoadEvent",
+                      "clickEvent",
+                      "formStartEvent",
+                      "formInputEvent",
+                      "formSubmitEvent",
+                      "rightClickEvent",
+                      "customEvent",
+                    ].includes(event.type) && (
+                      <div>
+                        <div style={{ fontSize: "0.7rem", opacity: 0.8 }}>
+                          {JSON.stringify(event.data, null, 2).substring(
+                            0,
+                            200
+                          )}
+                          ...
+                        </div>
                       </div>
                     )}
                   </div>

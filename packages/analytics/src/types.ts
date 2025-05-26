@@ -1,30 +1,13 @@
-// Adobe Analytics interfaces
-export interface AdobeAnalytics {
-  t: () => void;
-  tl: (
-    element: any,
-    linkType: string,
-    linkName: string,
-    variables?: any
-  ) => void;
-  pageName: string;
-  channel: string;
-  events: string;
-  eVar1?: string;
-  eVar2?: string;
-  eVar3?: string;
-  eVar4?: string;
-  eVar5?: string;
-  prop1?: string;
-  prop2?: string;
-  prop3?: string;
-  prop4?: string;
-  prop5?: string;
+// Adobe Data Layer interfaces
+export interface AdobeDataLayer {
+  push: (eventType: string, eventData: any) => void;
+  length: number;
+  [index: number]: any;
 }
 
 declare global {
   interface Window {
-    s?: AdobeAnalytics;
+    adobeDataLayer?: AdobeDataLayer;
   }
 }
 

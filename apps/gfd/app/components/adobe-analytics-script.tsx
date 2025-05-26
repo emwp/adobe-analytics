@@ -11,105 +11,70 @@ const AdobeAnalyticsScript = ({
 }: AdobeAnalyticsScriptProps) => {
   return (
     <>
-      {/* Adobe Analytics AppMeasurement Script */}
+      {/* Adobe Analytics Data Layer Script */}
       <Script
         id="adobe-analytics-config"
         strategy="beforeInteractive"
-        src="https://assets.adobedtm.com/x/y/z.min.js"
+        // src="https://assets.adobedtm.com/x/y/z.min.js"
+        // NOTE: Below is just a mock for demo purposes
         dangerouslySetInnerHTML={{
           __html: `
-            // Adobe Analytics Configuration
-            window.s_account = "${reportSuiteId}";
-            window.s = {};
+            // Initialize Adobe Data Layer
+            window.adobeDataLayer = window.adobeDataLayer || [];
             
-            // Mock Adobe Analytics object for demo purposes
-            window.s = {
-              account: "${reportSuiteId}",
-              trackingServer: "${trackingServer}",
-              visitorNamespace: "analytics",
-              pageName: "",
-              channel: "",
-              server: "",
-              pageType: "",
-              prop1: "",
-              prop2: "",
-              prop3: "",
-              prop4: "",
-              prop5: "",
-              eVar1: "",
-              eVar2: "",
-              eVar3: "",
-              eVar4: "",
-              eVar5: "",
-              events: "",
+            // Helper function to get browser info
+            function getBrowserInfo() {
+              const ua = navigator.userAgent;
+              let browser = 'Unknown';
+              if (ua.includes('Chrome')) browser = 'Chrome';
+              else if (ua.includes('Firefox')) browser = 'Firefox';
+              else if (ua.includes('Safari')) browser = 'Safari';
+              else if (ua.includes('Edge')) browser = 'Edge';
+              return browser;
+            }
+            
+            // Helper function to get user info (mock for demo)
+            function getUserInfo() {
+              return {
+                userId: 'user_' + Math.random().toString(36).substr(2, 9),
+                sessionId: 'session_' + Date.now(),
+                browser: getBrowserInfo(),
+                userAgent: navigator.userAgent.substring(0, 100),
+                language: navigator.language,
+                platform: navigator.platform
+              };
+            }
+            
+            // Data Layer push method
+            window.adobeDataLayer.push = function(eventType, eventData) {
+              const enrichedData = {
+                ...eventData,
+                ...getUserInfo(),
+                timestamp: new Date().toISOString(),
+                reportSuite: "${reportSuiteId}",
+                trackingServer: "${trackingServer}"
+              };
               
-              // Core tracking methods
-              t: function() {
-                console.log('Adobe Analytics: Page view tracked', {
-                  pageName: this.pageName,
-                  channel: this.channel,
-                  events: this.events,
-                  timestamp: new Date().toISOString()
-                });
-                
-                // Dispatch custom event for our terminal display
-                window.dispatchEvent(new CustomEvent('adobe-analytics-track', {
-                  detail: {
-                    type: 'pageview',
-                    data: {
-                      pageName: this.pageName,
-                      channel: this.channel,
-                      events: this.events,
-                      timestamp: new Date().toISOString()
-                    }
-                  }
-                }));
-                
-                // Reset variables after tracking
-                this.clearVars();
-              },
+              console.log('Adobe Data Layer:', eventType, enrichedData);
               
-              tl: function(element, linkType, linkName) {
-                console.log('Adobe Analytics: Link tracked', {
-                  linkType: linkType,
-                  linkName: linkName,
-                  events: this.events,
-                  timestamp: new Date().toISOString()
-                });
-                
-                // Dispatch custom event for our terminal display
-                window.dispatchEvent(new CustomEvent('adobe-analytics-track', {
-                  detail: {
-                    type: 'link',
-                    data: {
-                      linkType: linkType,
-                      linkName: linkName,
-                      events: this.events,
-                      timestamp: new Date().toISOString()
-                    }
-                  }
-                }));
-                
-                // Reset variables after tracking
-                this.clearVars();
-              },
+              // Dispatch custom event for our terminal display
+              window.dispatchEvent(new CustomEvent('adobe-analytics-track', {
+                detail: {
+                  type: eventType,
+                  data: enrichedData
+                }
+              }));
               
-              clearVars: function() {
-                this.pageName = "";
-                this.channel = "";
-                this.events = "";
-                this.prop1 = "";
-                this.prop2 = "";
-                this.prop3 = "";
-                this.eVar1 = "";
-                this.eVar2 = "";
-                this.eVar3 = "";
-              }
+              // Store in the data layer array for potential batch processing
+              Array.prototype.push.call(this, {
+                event: eventType,
+                data: enrichedData
+              });
             };
             
-            // Make s object globally available
+            // Make data layer globally available
             window.adobe = window.adobe || {};
-            window.adobe.analytics = window.s;
+            window.adobe.dataLayer = window.adobeDataLayer;
           `,
         }}
       />
