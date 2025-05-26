@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Adobe Analytics Demo - GFD App
+
+This is the main application that demonstrates Adobe Analytics implementation with Next.js, including micro-frontend integration via iframe.
+
+## Environment Variables
+
+Create a `.env.local` file in the root of this app with the following variables:
+
+```bash
+# URL for the iframe micro-frontend app
+# For local development:
+NEXT_PUBLIC_IFRAME_URL=http://localhost:3001
+# For production (replace with your deployed iframe app URL):
+# NEXT_PUBLIC_IFRAME_URL=https://your-iframe-app.vercel.app
+
+# Adobe Analytics Configuration (optional)
+NEXT_PUBLIC_ADOBE_REPORT_SUITE=dev-analytics-suite
+NEXT_PUBLIC_ADOBE_TRACKING_SERVER=analytics.example.com
+```
 
 ## Getting Started
 

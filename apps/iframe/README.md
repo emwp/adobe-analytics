@@ -1,4 +1,13 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Adobe Analytics Demo - Iframe App
+
+This is the micro-frontend application that gets loaded inside an iframe by the main GFD app. It demonstrates cross-origin analytics tracking using the shared analytics package.
+
+## Features
+
+- Lightweight micro-frontend designed to be embedded in iframe
+- Cross-origin analytics tracking via postMessage
+- Shared analytics package integration
+- Clean, focused UI with analytics demonstration
 
 ## Getting Started
 
@@ -14,7 +23,9 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+
+**Note:** This app is designed to be embedded in the main GFD app via iframe. For the full analytics demo experience, run both apps and access the main app at [http://localhost:3000](http://localhost:3000).
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

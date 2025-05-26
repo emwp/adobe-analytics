@@ -1,14 +1,15 @@
-# Turborepo starter
+# Adobe Analytics Demo - Turborepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+A comprehensive demonstration of Adobe Analytics implementation with Next.js in a monorepo structure, featuring micro-frontend integration and cross-origin analytics tracking.
 
-## Using this example
+## Features
 
-Run the following command:
-
-```sh
-npx create-turbo@latest
-```
+- **Adobe Analytics Integration**: Complete implementation with data layer pattern
+- **Micro-Frontend Architecture**: Iframe-based micro-frontend with cross-origin analytics
+- **Shared Analytics Package**: Reusable analytics library across multiple apps
+- **Real-time Debugging**: Analytics terminal for real-time event monitoring
+- **TypeScript Support**: Full type safety across all packages
+- **Monorepo Structure**: Turborepo for efficient development and deployment
 
 ## What's inside?
 
@@ -16,11 +17,12 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `gfd`: Main [Next.js](https://nextjs.org/) app with Adobe Analytics demo
+- `iframe`: Micro-frontend [Next.js](https://nextjs.org/) app for iframe integration
+- `@repo/analytics`: Shared analytics library with Adobe Analytics integration
+- `@repo/ui`: React component library shared by both applications
+- `@repo/eslint-config`: ESLint configurations
+- `@repo/typescript-config`: TypeScript configurations
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -41,14 +43,34 @@ cd my-turborepo
 pnpm build
 ```
 
+### Environment Setup
+
+For production deployment with Vercel, set up environment variables:
+
+**GFD App (Main App):**
+Create `apps/gfd/.env.local`:
+
+```bash
+# URL for the iframe micro-frontend app
+NEXT_PUBLIC_IFRAME_URL=https://your-iframe-app.vercel.app
+```
+
+**Local Development:**
+The iframe URL defaults to `http://localhost:3001` for local development.
+
 ### Develop
 
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
+cd analytics
 pnpm dev
 ```
+
+This will start both apps:
+
+- GFD app: http://localhost:3000
+- Iframe app: http://localhost:3001
 
 ### Remote Caching
 

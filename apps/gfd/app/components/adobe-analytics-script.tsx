@@ -6,8 +6,10 @@ interface AdobeAnalyticsScriptProps {
 }
 
 const AdobeAnalyticsScript = ({
-  reportSuiteId = "dev-analytics-suite",
-  trackingServer = "analytics.example.com",
+  reportSuiteId = process.env.NEXT_PUBLIC_ADOBE_REPORT_SUITE ||
+    "dev-analytics-suite",
+  trackingServer = process.env.NEXT_PUBLIC_ADOBE_TRACKING_SERVER ||
+    "analytics.example.com",
 }: AdobeAnalyticsScriptProps) => {
   return (
     <>

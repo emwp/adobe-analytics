@@ -1,8 +1,9 @@
-"use client";
-
 import InteractiveElements from "./components/interactive-elements";
 
 export default function Home() {
+  // Get iframe URL from environment variable, fallback to localhost
+  const iframeUrl =
+    process.env.NEXT_PUBLIC_IFRAME_URL || "http://localhost:3001";
   return (
     <div
       style={{
@@ -229,10 +230,10 @@ export default function Home() {
                   fontWeight: "500",
                 }}
               >
-                Micro-Frontend: Iframe App (Port 3001)
+                Micro-Frontend: Iframe App ({iframeUrl})
               </div>
               <iframe
-                src="http://localhost:3001"
+                src={iframeUrl}
                 style={{
                   width: "100%",
                   height: "24rem",
